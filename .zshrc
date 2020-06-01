@@ -7,9 +7,7 @@ export ZSH="/Users/bbrown/.oh-my-zsh"
 # Path to NPM
 export PATH=/usr/local/share/npm/bin:$PATH
 
-# VS Code
 
-code () { VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args $* ;}
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -112,7 +110,7 @@ compinit
 # else
 #   export EDITOR='mvim'
 # fi
-
+export EDITOR='code -w'
 
 export atom="/usr/local/bin/atom"
 
@@ -134,12 +132,16 @@ alias @sfdx="cd  ~/Documents/Projects/salesforce-scripting/"
 alias @projects="cd ~/Documents/Projects"
 alias @lwc="cd ~/Documents/Projects/salesforce-lwc-experiment/salesforce-lwc-experiment"
 alias @ml="cd ~/Documents/Projects/machine_learning"
+alias @sicp="cd ~/Documents/Projects/sicp/SICP-exercises"
 
 alias @tesla="cd ~/tesla"
 alias @tesla-site="cd ~/tesla/projects/tesla-site"
+alias @tesla-auth="cd ~/tesla/projects/tesla-auth"
 alias @exercism="cd ~/exercism"
 
-alias @dotfiles="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
+alias @ruby-exercism="cd ~/exercism/ruby/ruby-exercism/ruby"
+
+alias @dotfiles='/usr/local/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 #Docker Aliases
@@ -159,4 +161,10 @@ if [ -f '/Users/bbrown/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/bbrown/g
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/bbrown/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/bbrown/google-cloud-sdk/completion.zsh.inc'; fi
-alias dotfiles='/usr/bin/git --git-dir=/Users/bbrown/.dotfiles/ --work-tree=/Users/bbrown'
+
+
+# kubernetes alias
+
+alias kubeauthdev2="gcloud container clusters get-credentials tesla-development --zone us-west1-a --project oe-tesla-development-2 && kubectl config current-context"
+
+alias kubeauthproduction2="gcloud container clusters get-credentials tesla-production --zone us-west1-a --project oe-tesla-production-2 && kubectl config current-context"
