@@ -34,11 +34,6 @@
   r = reset
   s = status
 
-[core]
-  excludesfile = ~/.gitignore
-  autocrlf = input
-  mergeoptions = --no-edit --ff-only
-  pager = diff-so-fancy | less --tabs=4 -R
 
 [commit]
   template = ~/.gitmessage
