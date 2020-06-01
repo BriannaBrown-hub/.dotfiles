@@ -1,0 +1,74 @@
+{
+	"name": "sfdxmate",
+	"displayName": "SFDX Mate",
+	"description": "VS Code companion extension for augmenting Salesforce DX development.",
+	"publisher": "adambek",
+	"author": {
+		"name": "adambek"
+	},
+	"icon": "images/sfdxmate-icon.png",
+	"version": "1.0.1",
+	"engines": {
+		"vscode": "^1.30.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+		"*"
+	],
+	"main": "./out/extension.js",
+	"contributes": {
+		"commands": [
+			{
+				"command": "show.username",
+				"title": "Show Default Username",
+				"category": "SFDX Mate"
+			},
+			{
+				"command": "show.devhub",
+				"title": "Show Default Dev Hub",
+				"category": "SFDX Mate"
+			},
+			{
+				"command": "change.defaultorg",
+				"title": "Change Default Org",
+				"category": "SFDX Mate"
+			}
+		]
+	},
+	"scripts": {
+		"vscode:prepublish": "npm run compile",
+		"compile": "tsc -p ./",
+		"watch": "tsc -watch -p ./",
+		"postinstall": "node ./node_modules/vscode/bin/install",
+		"test": "npm run compile && node ./node_modules/vscode/bin/test"
+	},
+	"devDependencies": {
+		"typescript": "^3.1.4",
+		"vscode": "^1.1.25",
+		"tslint": "^5.8.0",
+		"@types/node": "^8.10.25",
+		"@types/mocha": "^2.2.42"
+	},
+	"dependencies": {
+		"@salesforce/core": "^1.1.2",
+		"hoek": "^6.1.2",
+		"moment": "^2.23.0"
+	},
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/adamluvshotsauce/sfdxmate/issues",
+		"email": "abekuret@gmail.com"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/adamluvshotsauce/sfdxmate.git"
+	},
+	"homepage": "https://github.com/adamluvshotsauce/sfdxmate/blob/master/README.md",
+	"__metadata": {
+		"id": "557392d3-2dc8-42c7-b183-9ca348e1e10d",
+		"publisherId": "630029dc-d96e-474a-864c-c17a14799913",
+		"publisherDisplayName": "Adam Bek"
+	}
+}

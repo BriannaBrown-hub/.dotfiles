@@ -1,0 +1,19 @@
+{
+  "configuration_title": "Salesforce Apex Configuration",
+  "test_view_container_title": "Test Viewer",
+  "test_view_name": "Apex Tests",
+  "run_tests_title": "Run Tests",
+  "refresh_test_title": "Refresh Tests",
+  "run_single_test_title": "Run Single Test",
+  "show_error_title": "Display Error",
+  "go_to_definition_title": "Go to Definition",
+  "java_home_description": "Specifies the folder path to the Java 8 or Java 11 runtime used to launch the Apex Language Server (for example, /Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home).",
+  "java_memory_description": "Specifies the amount of memory allocation to the Apex Language Server in MB or null to use the default value.",
+  "apex_semantic_errors_description": "Allow Apex Language Server to surface semantic errors",
+  "force_apex_test_last_class_run_text": "SFDX: Re-Run Last Invoked Apex Test Class",
+  "force_apex_test_last_method_run_text": "SFDX: Re-Run Last Invoked Apex Test Method",
+  "force_apex_test_class_run_text": "SFDX: Invoke Apex Test Class",
+  "force_apex_test_method_run_text": "SFDX: Invoke Apex Test Method",
+  "force_sobjects_refresh": "SFDX: Refresh SObject Definitions",
+  "enable_sobject_refresh_on_startup_description": "If a project has no sObject definitions, specifies whether to automatically refresh sObject definitions on extension activation (true) or not (false)."
+}

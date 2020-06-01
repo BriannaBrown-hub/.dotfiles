@@ -1,0 +1,66 @@
+{
+	"name": "sfdx-cli",
+	"displayName": "sfdx-cli",
+	"description": "Interface for sfdx-cli",
+	"version": "0.0.1",
+	"publisher": "vibd",
+	"engines": {
+		"vscode": "^1.13.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+		"*"
+	],
+	"main": "./extension",
+	"contributes": {
+		"commands": [
+			{
+				"command": "extension.newApexClass",
+				"title": "sfdx: New Apex Class"
+			},
+			{
+				"command": "extension.newLightningComponent",
+				"title": "sfdx: New Lightning Component"
+			},
+			{
+				"command": "extension.newLightningApp",
+				"title": "sfdx: New Lightning App"
+			}
+		],
+		"menus": {
+			"explorer/context": [
+				{
+					"when": "explorerResourceIsFolder",
+					"command": "extension.newApexClass"
+				},
+				{
+					"when": "explorerResourceIsFolder",
+					"command": "extension.newLightningComponent"
+				},
+				{
+					"when": "explorerResourceIsFolder",
+					"command": "extension.newLightningApp"
+				}
+			]
+		}
+	},
+	"scripts": {
+		"postinstall": "node ./node_modules/vscode/bin/install",
+		"test": "node ./node_modules/vscode/bin/test"
+	},
+	"devDependencies": {
+		"typescript": "^2.0.3",
+		"vscode": "^1.0.0",
+		"mocha": "^2.3.3",
+		"eslint": "^3.6.0",
+		"@types/node": "^6.0.40",
+		"@types/mocha": "^2.2.32"
+	},
+	"__metadata": {
+		"id": "ac626869-82b2-46c3-ae83-56842ffa72e1",
+		"publisherId": "be6f7841-a27e-4497-b4fc-fae4f7ceb7a5",
+		"publisherDisplayName": "James Boggs"
+	}
+}

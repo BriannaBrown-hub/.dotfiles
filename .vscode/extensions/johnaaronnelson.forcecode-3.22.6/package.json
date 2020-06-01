@@ -1,0 +1,719 @@
+{
+	"name": "forcecode",
+	"version": "3.22.6",
+	"publisher": "JohnAaronNelson",
+	"displayName": "ForceCode",
+	"description": "Visual Studio Code extension for Salesforce (SFDC) development",
+	"author": {
+		"name": "celador"
+	},
+	"license": "MIT",
+	"engines": {
+		"vscode": "^1.43.0"
+	},
+	"icon": "images/new-logo.png",
+	"categories": [
+		"Other"
+	],
+	"galleryBanner": {
+		"color": "#FF4500",
+		"theme": "dark"
+	},
+	"private": false,
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/celador/ForceCode.git"
+	},
+	"activationEvents": [
+		"workspaceContains:force.json",
+		"onCommand:ForceCode.createProject"
+	],
+	"main": "./dist/src/extension",
+	"contributes": {
+		"views": {
+			"fcView": [
+				{
+					"id": "ForceCode.codeCovDataProvider",
+					"name": "Code Coverage",
+					"when": "ForceCodeActive"
+				},
+				{
+					"id": "ForceCode.switchUserProvider",
+					"name": "Saved Usernames",
+					"when": "ForceCodeActive"
+				},
+				{
+					"id": "ForceCode.saveHistoryProvider",
+					"name": "Save History",
+					"when": "ForceCodeActive"
+				},
+				{
+					"id": "ForceCode.treeDataProvider",
+					"name": "Running Tasks",
+					"when": "ForceCodeActive"
+				}
+			]
+		},
+		"viewsContainers": {
+			"activitybar": [
+				{
+					"id": "fcView",
+					"icon": "./images/fcView.svg",
+					"title": "ForceCode"
+				}
+			]
+		},
+		"commands": [
+			{
+				"command": "ForceCode.createProject",
+				"title": "ForceCode: Create Project"
+			},
+			{
+				"command": "ForceCode.showMenu",
+				"title": "ForceCode: ForceCode Menu"
+			},
+			{
+				"command": "ForceCode.openOrg",
+				"title": "ForceCode: Open Org In Browser"
+			},
+			{
+				"command": "ForceCode.compile",
+				"title": "ForceCode: Save/Deploy/Compile"
+			},
+			{
+				"command": "ForceCode.forceCompile",
+				"title": "ForceCode: Save/Deploy/Compile",
+				"icon": {
+					"light": "./images/compile.svg",
+					"dark": "./images/compile.svg"
+				}
+			},
+			{
+				"command": "ForceCode.refresh",
+				"title": "ForceCode: Refresh from server",
+				"icon": {
+					"light": "./images/refresh.svg",
+					"dark": "./images/refresh.svg"
+				}
+			},
+			{
+				"command": "ForceCode.executeAnonymous",
+				"title": "ForceCode: Execute Anonymous"
+			},
+			{
+				"command": "ForceCode.open",
+				"title": "ForceCode: Get Class, Page, or Trigger"
+			},
+			{
+				"command": "ForceCode.staticResource",
+				"title": "ForceCode: Bundle / Deploy Static Resource"
+			},
+			{
+				"command": "ForceCode.openFileInOrg",
+				"title": "ForceCode: Open this file in the Org"
+			},
+			{
+				"command": "ForceCode.toggleCoverage",
+				"title": "ForceCode: Toggle Test Coverage",
+				"icon": {
+					"light": "./images/coverage.svg",
+					"dark": "./images/coverage.svg"
+				}
+			},
+			{
+				"command": "ForceCode.previewVF",
+				"title": "ForceCode: Preview Visualforce page",
+				"icon": {
+					"light": "./images/logo.svg",
+					"dark": "./images/logo.svg"
+				}
+			},
+			{
+				"command": "ForceCode.previewApp",
+				"title": "ForceCode: Preview Lightning App",
+				"icon": {
+					"light": "./images/logo.svg",
+					"dark": "./images/logo.svg"
+				}
+			},
+			{
+				"command": "ForceCode.diff",
+				"title": "ForceCode: Diff Local <> Remote"
+			},
+			{
+				"command": "ForceCode.logout",
+				"title": "Log out of this org"
+			},
+			{
+				"command": "ForceCode.switchUser",
+				"title": "Switch to this org"
+			},
+			{
+				"command": "ForceCode.login",
+				"title": "Log into this org"
+			},
+			{
+				"command": "ForceCode.removeConfig",
+				"title": "Remove ForceCode configuration folder"
+			},
+			{
+				"command": "ForceCode.cancelCommand",
+				"title": "Cancel Task",
+				"icon": {
+					"light": "./images/cancel.svg",
+					"dark": "./images/cancel.svg"
+				}
+			},
+			{
+				"command": "ForceCode.runTests",
+				"title": "Run Test",
+				"icon": {
+					"light": "./images/runTest.svg",
+					"dark": "./images/runTest.svg"
+				}
+			},
+			{
+				"command": "ForceCode.deleteFile",
+				"title": "ForceCode: Delete file from org"
+			}
+		],
+		"keybindings": [
+			{
+				"command": "ForceCode.showMenu",
+				"key": "alt+cmd+c",
+				"win": "ctrl+shift+c",
+				"linux": "ctrl+shift+c",
+				"when": "editorFocus && ForceCodeActive"
+			},
+			{
+				"command": "ForceCode.compile",
+				"key": "alt+cmd+s",
+				"win": "ctrl+shift+s",
+				"linux": "ctrl+shift+s",
+				"when": "editorFocus && ForceCodeActive  && editorIsOpen && ForceCodeLoggedIn"
+			},
+			{
+				"command": "ForceCode.executeAnonymous",
+				"key": "alt+cmd+e",
+				"win": "alt+shift+e",
+				"linux": "alt+shift+e",
+				"when": "editorFocus && ForceCodeActive && editorHasSelection && ForceCodeLoggedIn"
+			},
+			{
+				"command": "ForceCode.open",
+				"key": "alt+cmd+o",
+				"win": "alt+shift+o",
+				"linux": "alt+shift+o",
+				"when": "ForceCodeActive && ForceCodeLoggedIn"
+			},
+			{
+				"command": "ForceCode.staticResource",
+				"key": "alt+cmd+b",
+				"win": "alt+shift+b",
+				"linux": "alt+shift+b",
+				"when": "ForceCodeActive && ForceCodeLoggedIn"
+			}
+		],
+		"configuration": {
+			"type": "object",
+			"title": "ForceCode configuration",
+			"properties": {
+				"force.allowAnonymousUsageTracking": {
+					"type": "boolean",
+					"default": false,
+					"description": "Allow the Forcecode team to track anonymous usage data so that we can improve your overall experience."
+				},
+				"force.autoRefresh": {
+					"type": "boolean",
+					"default": false,
+					"description": "If autoCompile is on, and you're working in a resource-bundles folder, the staticResource will automatically compile and deploy to your org.  If autoRefresh is on (and you're working on a Mac), the currently active tab in Google Chrome Canary (or your configured browser) will be refreshed.  This provides a simple browsersync-like experience without the overhead of browsersync"
+				},
+				"force.browser": {
+					"type": "string",
+					"default": "Google Chrome Canary",
+					"description": "Define which browser you want to reload when the static resource refreshes (this only works with Macs at the moment)"
+				},
+				"force.bulkLoaderPollInterval": {
+					"type": "number",
+					"default": 2000,
+					"description": "The amount of time in milliseconds between updates when doing bulk CRUD operations."
+				},
+				"force.bulkLoaderPollTimeout": {
+					"type": "number",
+					"default": 60000,
+					"description": "The amount of time in milliseconds until a bulk load times out."
+				},
+				"force.checkForFileChanges": {
+					"type": "boolean",
+					"default": false,
+					"description": "This option, when checked, will allow ForceCode to check for file changes against the server on startup of ForceCode."
+				},
+				"force.defaultApiVersion": {
+					"type": "string",
+					"default": "48.0",
+					"description": "The Salesforce API version to use when logging into new orgs. Must be in the format of XX.X. Example: 45.0"
+				},
+				"force.debugFilter": {
+					"type": "string",
+					"default": "USER_DEBUG|FATAL_ERROR",
+					"description": "A regular expression used to match a line for display. The default is to show debug and error lines, so you can filter out the log noise."
+				},
+				"force.debugOnly": {
+					"type": "boolean",
+					"default": true,
+					"description": "When executing anonymous or running Apex tests, we can either show all the output or only the debug lines. This makes it easier to debug your code. Turn if on for the important stuff, and turn it off to get all the detail."
+				},
+				"force.filesExclude": {
+					"type": "object",
+					"default": {
+						".gitignore": true,
+						".DS_Store": true,
+						".org_metadata": true,
+						"**/*.map": true,
+						"node_modules/**": true,
+						"bower_modules/**": true,
+						"**.tmp": true,
+						".log": true,
+						"forceBundleSettings.json": true
+					},
+					"description": "An object describing the files to exclude from the Static Resource build. The key is a Nodejs \"Glob\" pattern, the value is true or false"
+				},
+				"force.maxFileChangeNotifications": {
+					"type": "number",
+					"default": 15,
+					"description": "The maximum number of file change notifications that will be shown on startup of the extension."
+				},
+				"force.maxQueryHistory": {
+					"type": "number",
+					"default": 10,
+					"description": "The maximum number of queries to store in the query history of the query editor."
+				},
+				"force.maxQueryResultsPerPage": {
+					"type": "number",
+					"default": 250,
+					"description": "The maximum number of results to show per page when executing a query in the query editor."
+				},
+				"force.maxSaveHistory": {
+					"type": "number",
+					"default": 10,
+					"description": "The maximum number of save history results to show in the Forcecode view."
+				},
+				"force.onlyShowProjectUsernames": {
+					"type": "boolean",
+					"default": true,
+					"description": "If checked, Forcecode will only show the usernames in use in each project instead of every one that has been authenticated on your machine."
+				},
+				"force.outputQueriesAsCSV": {
+					"type": "boolean",
+					"default": true,
+					"description": "If checked, will retrieve soql/toql results in csv form. If false, json will be returned."
+				},
+				"force.revealTestedClass": {
+					"type": "boolean",
+					"default": false,
+					"description": "When checked, this will reveal the class (In the code coverage view) that received the highest amount of coverage from running a test. I say this because if you don't have the tested class in your src folder then it will show the next highest covered class in your project. If none are found then it won't be revealed."
+				},
+				"force.setDefaultUsernameOnLogin": {
+					"type": "boolean",
+					"default": true,
+					"description": "When checked, Forcecode will update the SFDX CLI default username to the current logged in org each time you switch usernames. This allows you to use Forcecode alongside of the Salesforce extensions, so you don't need to worry about changing the default username each time you switch orgs."
+				},
+				"force.showFilesOnOpen": {
+					"type": "boolean",
+					"default": true,
+					"description": "If checked, will open files in the editor when opened from Salesforce."
+				},
+				"force.showFilesOnOpenMax": {
+					"type": "number",
+					"default": 3,
+					"description": "The maximum number of files to open in the editor. More than 3 usually causes problems or doesn't work."
+				},
+				"force.showTestLog": {
+					"type": "boolean",
+					"default": true,
+					"description": "This flag determines if the Log file for the last test run should show up after the tests are complete.  This is nice for debugging tests.  Use this in conjunction with the other debug flags to keep your output tidy. The log file will only show if it's not empty (Because of filtering)."
+				}
+			}
+		},
+		"languages": [
+			{
+				"id": "apex",
+				"extensions": [
+					".apex",
+					".cls",
+					".trigger",
+					".tgr"
+				],
+				"aliases": [
+					"Apex"
+				]
+			},
+			{
+				"id": "visualforce",
+				"extensions": [
+					".component",
+					".page"
+				],
+				"aliases": [
+					"Visualforce"
+				]
+			},
+			{
+				"id": "html",
+				"extensions": [
+					".htm",
+					".html",
+					".cmp",
+					".app",
+					".auradoc",
+					".evt",
+					".design",
+					".intf",
+					".tokens"
+				],
+				"aliases": [
+					"HTML"
+				]
+			},
+			{
+				"id": "javascript",
+				"extensions": [
+					".js"
+				],
+				"aliases": [
+					"Javascript"
+				]
+			},
+			{
+				"id": "css",
+				"extensions": [
+					".css"
+				],
+				"aliases": [
+					"CSS"
+				]
+			},
+			{
+				"id": "svg",
+				"extensions": [
+					".svg"
+				],
+				"aliases": [
+					"SVG"
+				]
+			},
+			{
+				"id": "staticResource",
+				"extensions": [
+					".resource"
+				]
+			},
+			{
+				"id": "apexCodeCoverage",
+				"extensions": [
+					".acov"
+				]
+			}
+		],
+		"menus": {
+			"editor/title": [
+				{
+					"when": "resourceLangId == apex && ForceCodeActive && ForceCodeLoggedIn",
+					"command": "ForceCode.toggleCoverage",
+					"group": "navigation"
+				},
+				{
+					"when": "resourceExtname == .page && ForceCodeActive && ForceCodeLoggedIn",
+					"command": "ForceCode.previewVF",
+					"group": "navigation"
+				},
+				{
+					"when": "resourceExtname == .app && ForceCodeActive && ForceCodeLoggedIn",
+					"command": "ForceCode.previewApp",
+					"group": "navigation"
+				},
+				{
+					"when": "ForceCodeActive && ForceCodeLoggedIn && isInDiffEditor",
+					"command": "ForceCode.refresh",
+					"group": "navigation"
+				},
+				{
+					"when": "ForceCodeActive && ForceCodeLoggedIn && isInDiffEditor",
+					"command": "ForceCode.forceCompile",
+					"group": "navigation"
+				}
+			],
+			"editor/context": [
+				{
+					"when": "ForceCodeActive && ForceCodeLoggedIn",
+					"command": "ForceCode.openOrg",
+					"group": "ForceCode"
+				},
+				{
+					"when": "ForceCodeActive && ForceCodeLoggedIn",
+					"command": "ForceCode.compile",
+					"group": "ForceCode"
+				},
+				{
+					"when": "ForceCodeActive && ForceCodeLoggedIn",
+					"command": "ForceCode.refresh",
+					"group": "ForceCode"
+				},
+				{
+					"when": "resourceExtname == .page && ForceCodeActive && ForceCodeLoggedIn",
+					"command": "ForceCode.previewVF",
+					"group": "ForceCode"
+				},
+				{
+					"when": "resourceExtname == .app && ForceCodeActive && ForceCodeLoggedIn",
+					"command": "ForceCode.previewApp",
+					"group": "ForceCode"
+				},
+				{
+					"when": "resourceLangId == apex && ForceCodeActive && ForceCodeLoggedIn",
+					"command": "ForceCode.toggleCoverage",
+					"group": "ForceCode"
+				},
+				{
+					"when": "resourceLangId == visualforce && ForceCodeActive && ForceCodeLoggedIn",
+					"command": "ForceCode.openFileInOrg",
+					"group": "ForceCode"
+				},
+				{
+					"when": "resourceLangId == apex && ForceCodeActive && ForceCodeLoggedIn",
+					"command": "ForceCode.openFileInOrg",
+					"group": "ForceCode"
+				},
+				{
+					"when": "resourceLangId == apex && editorHasSelection && ForceCodeActive && ForceCodeLoggedIn",
+					"command": "ForceCode.executeAnonymous",
+					"group": "ForceCode"
+				},
+				{
+					"when": "resourceLangId == visualforce && ForceCodeActive && ForceCodeLoggedIn",
+					"command": "ForceCode.diff",
+					"group": "ForceCode"
+				},
+				{
+					"when": "resourceLangId == html && ForceCodeActive && ForceCodeLoggedIn",
+					"command": "ForceCode.diff",
+					"group": "ForceCode"
+				},
+				{
+					"when": "resourceLangId == javascript && ForceCodeActive && ForceCodeLoggedIn",
+					"command": "ForceCode.diff",
+					"group": "ForceCode"
+				},
+				{
+					"when": "resourceLangId == apex && ForceCodeActive && ForceCodeLoggedIn",
+					"command": "ForceCode.diff",
+					"group": "ForceCode"
+				},
+				{
+					"when": "resourceLangId == css && ForceCodeActive && ForceCodeLoggedIn",
+					"command": "ForceCode.diff",
+					"group": "ForceCode"
+				},
+				{
+					"when": "resourceLangId == svg && ForceCodeActive && ForceCodeLoggedIn",
+					"command": "ForceCode.diff",
+					"group": "ForceCode"
+				},
+				{
+					"when": "ForceCodeActive && ForceCodeLoggedIn",
+					"command": "ForceCode.deleteFile",
+					"group": "ForceCode"
+				}
+			],
+			"explorer/context": [
+				{
+					"when": "ForceCodeActive && ForceCodeLoggedIn",
+					"command": "ForceCode.refresh",
+					"group": "ForceCode"
+				},
+				{
+					"when": "ForceCodeActive && !explorerResourceIsFolder && ForceCodeLoggedIn",
+					"command": "ForceCode.compile",
+					"group": "ForceCode"
+				},
+				{
+					"when": "ForceCodeActive && ForceCodeLoggedIn",
+					"command": "ForceCode.deleteFile",
+					"group": "ForceCode"
+				}
+			],
+			"view/item/context": [
+				{
+					"when": "viewItem == currentConn && ForceCodeActive",
+					"command": "ForceCode.logout"
+				},
+				{
+					"when": "viewItem == loggedInConn && ForceCodeActive",
+					"command": "ForceCode.logout"
+				},
+				{
+					"when": "viewItem == loggedInConn && ForceCodeActive",
+					"command": "ForceCode.switchUser"
+				},
+				{
+					"when": "viewItem == loggedInConn && ForceCodeActive",
+					"command": "ForceCode.removeConfig"
+				},
+				{
+					"when": "viewItem == notLoggedInConn && ForceCodeActive",
+					"command": "ForceCode.login"
+				},
+				{
+					"when": "viewItem == notLoggedInConn && ForceCodeActive",
+					"command": "ForceCode.removeConfig"
+				},
+				{
+					"when": "viewItem == forceCodeTask && ForceCodeActive",
+					"command": "ForceCode.cancelCommand"
+				},
+				{
+					"when": "viewItem == forceCodeTask && ForceCodeActive",
+					"command": "ForceCode.cancelCommand",
+					"group": "inline"
+				},
+				{
+					"when": "viewItem == fcTestClass && ForceCodeActive",
+					"command": "ForceCode.runTests",
+					"group": "inline"
+				}
+			],
+			"commandPalette": [
+				{
+					"command": "ForceCode.createProject"
+				},
+				{
+					"command": "ForceCode.showMenu",
+					"when": "ForceCodeShowMenu"
+				},
+				{
+					"command": "ForceCode.compile",
+					"when": "ForceCodeActive && editorIsOpen && ForceCodeLoggedIn"
+				},
+				{
+					"command": "ForceCode.refresh",
+					"when": "ForceCodeActive && editorIsOpen && ForceCodeLoggedIn"
+				},
+				{
+					"command": "ForceCode.executeAnonymous",
+					"when": "ForceCodeActive && editorIsOpen && editorHasSelection && ForceCodeLoggedIn"
+				},
+				{
+					"command": "ForceCode.open",
+					"when": "ForceCodeActive && ForceCodeLoggedIn"
+				},
+				{
+					"command": "ForceCode.staticResource",
+					"when": "ForceCodeActive && ForceCodeLoggedIn"
+				},
+				{
+					"command": "ForceCode.toggleCoverage",
+					"when": "ForceCodeActive && resourceLangId == apex && ForceCodeLoggedIn"
+				},
+				{
+					"command": "ForceCode.diff",
+					"when": "ForceCodeActive && resourceLangId == apex && ForceCodeLoggedIn"
+				},
+				{
+					"command": "ForceCode.diff",
+					"when": "ForceCodeActive && resourceLangId == visualforce && ForceCodeLoggedIn"
+				},
+				{
+					"command": "ForceCode.diff",
+					"when": "ForceCodeActive && resourceLangId == html && ForceCodeLoggedIn"
+				},
+				{
+					"command": "ForceCode.diff",
+					"when": "ForceCodeActive && resourceLangId == javascript && ForceCodeLoggedIn"
+				},
+				{
+					"command": "ForceCode.diff",
+					"when": "ForceCodeActive && resourceLangId == css && ForceCodeLoggedIn"
+				},
+				{
+					"command": "ForceCode.diff",
+					"when": "ForceCodeActive && resourceLangId == svg && ForceCodeLoggedIn"
+				},
+				{
+					"command": "ForceCode.openOrg",
+					"when": "ForceCodeActive && ForceCodeLoggedIn"
+				},
+				{
+					"command": "ForceCode.openFileInOrg",
+					"when": "ForceCodeActive && editorIsOpen && ForceCodeLoggedIn"
+				},
+				{
+					"command": "ForceCode.previewVF",
+					"when": "ForceCodeActive && editorIsOpen && ForceCodeLoggedIn"
+				},
+				{
+					"command": "ForceCode.previewApp",
+					"when": "ForceCodeActive && editorIsOpen && ForceCodeLoggedIn"
+				},
+				{
+					"command": "ForceCode.deleteFile",
+					"when": "ForceCodeActive && editorIsOpen && ForceCodeLoggedIn"
+				}
+			]
+		}
+	},
+	"scripts": {
+		"major": "npm version major && git push",
+		"minor": "npm version minor && git push",
+		"patch": "npm version patch && git push",
+		"prerelease": "npm version prerelease && git push",
+		"compile": "tsc -p ./",
+		"watch": "tsc -watch -p ./",
+		"clean": "rimraf ./dist && rimraf ./node_modules/",
+		"test": "node ./dist/test/runTest.js",
+		"package": "rimraf ./dist && rimraf ./*.vsix && webpack --mode production && vsce package",
+		"webpack": "webpack --mode development",
+		"webpack-dev": "webpack --mode development --watch"
+	},
+	"devDependencies": {
+		"@types/deepmerge": "2.2.0",
+		"@types/fs-extra": "8.1.0",
+		"@types/globule": "1.1.3",
+		"@types/klaw": "3.0.0",
+		"@types/mocha": "^7.0.2",
+		"@types/node": "^10.17.18",
+		"@types/sinon": "^7.5.2",
+		"@types/universal-analytics": "0.4.4",
+		"@types/vscode": "1.43.0",
+		"@types/xml2js": "0.4.5",
+		"compressing": "1.5.0",
+		"deepmerge": "4.2.2",
+		"fs-extra": "9.0.0",
+		"globule": "1.3.1",
+		"jsforce": "1.9.3",
+		"klaw": "3.0.0",
+		"mime-types": "2.1.26",
+		"mocha": "^7.1.1",
+		"nyc": "^15.0.0",
+		"os": "0.1.1",
+		"request-light": "0.3.0",
+		"rimraf": "^3.0.2",
+		"sinon": "^9.0.1",
+		"source-map-support": "^0.5.16",
+		"tree-kill": "1.2.2",
+		"ts-loader": "^6.2.2",
+		"tslint": "^6.1.0",
+		"typescript": "^3.8.3",
+		"universal-analytics": "0.4.20",
+		"uuid": "7.0.3",
+		"vsce": "^1.74.0",
+		"vscode-test": "^1.3.0",
+		"webpack": "^4.42.1",
+		"webpack-cli": "^3.3.11",
+		"xml2js": "0.4.23"
+	},
+	"__metadata": {
+		"id": "7f2f6200-5039-436a-92a6-a020b661aa87",
+		"publisherId": "455301ea-1fd3-4f22-bc69-9c4cdb15c9d9",
+		"publisherDisplayName": "JohnAaronNelson"
+	}
+}
