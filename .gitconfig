@@ -3,7 +3,7 @@
 
 [user]
   name = Brianna Brown
-  email = brianna.t.brown@gmail.com
+  email = brianna.brown@optimumenergyco.com
 
 [init]
   templatedir = ~/.git_template
@@ -16,6 +16,8 @@
 
   # Custom script commands
   pull-request = "!$HOME/.dotfiles/bin/git/git-pull-request"
+  current-branch = "rev-parse --abbrev-ref HEAD"
+
 
   # Shortcuts
   a = add
