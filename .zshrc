@@ -76,18 +76,11 @@ source $ZSH/oh-my-zsh.sh
 # Path to SFDX Auto-completion
 fpath=(/Users/bbrown/Documents/git_repos/salesforce-cli-zsh-completion $fpath)
 
-#Anaconda
-PATH="$HOME/anaconda3/bin:$PATH"
-
 #Pyenv
 
-export PYENV_ROOT="/usr/local/var/pyenv"
-
-eval "$(pyenv init -)"
-
-# Path to Python 3
-
-# alias python="/usr/local/bin/python3"
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+fi
 
 # rbenv
 eval "$(rbenv init -)"
