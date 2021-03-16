@@ -15,6 +15,43 @@ export PATH=/usr/local/share/npm/bin:$PATH
 # See https://github.com/denysdovhan/spaceship-prompt.git
 ZSH_THEME="spaceship"
 
+SPACESHIP_PROMPT_ORDER=(
+  # time        # Time stamps section (Disabled)
+  user          # Username section
+  dir           # Current directory section
+  host          # Hostname section
+  git           # Git section (git_branch + git_status)
+  hg            # Mercurial section (hg_branch  + hg_status)
+  # package     # Package version (Disabled)
+  node          # Node.js section
+  ruby          # Ruby section
+  elixir        # Elixir section
+  # xcode       # Xcode section (Disabled)
+  swift         # Swift section
+  golang        # Go section
+  php           # PHP section
+  rust          # Rust section
+  haskell       # Haskell Stack section
+  # julia       # Julia section (Disabled)
+  # docker      # Docker section (Disabled)
+  aws           # Amazon Web Services section
+  # gcloud        # Google Cloud Platform section
+  venv          # virtualenv section
+  conda         # conda virtualenv section
+  pyenv         # Pyenv section
+  dotnet        # .NET section
+  # ember       # Ember.js section (Disabled)
+  kubectl       # Kubectl context section
+  terraform     # Terraform workspace section
+  exec_time     # Execution time
+  line_sep      # Line break
+  battery       # Battery level and status
+  # vi_mode     # Vi-mode indicator (Disabled)
+  jobs          # Background jobs indicator
+  exit_code     # Exit code section
+  char          # Prompt character
+)
+
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
 # a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
@@ -82,6 +119,13 @@ if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init -)"
 fi
 
+# export PYENV_ROOT="/usr/local/var/pyenv"
+
+# Path to Python 3
+# LIBPYTHON=/usr/lib/x86_64-linux-gnu/libpython3.6m.so.1
+
+# PYTHON="/usr/local/bin/python3"
+
 # rbenv
 eval "$(rbenv init -)"
 
@@ -126,11 +170,13 @@ alias @projects="cd ~/Documents/Projects"
 alias @lwc="cd ~/Documents/Projects/salesforce-lwc-experiment/salesforce-lwc-experiment"
 alias @ml="cd ~/Documents/Projects/machine_learning"
 alias @sicp="cd ~/Documents/Projects/sicp/SICP-exercises"
+alias @misc="cd ~/Documents/misc"
 
 alias @tesla="cd ~/tesla"
 alias @tesla-site="cd ~/tesla/projects/tesla-site"
 alias @tesla-auth="cd ~/tesla/projects/tesla-auth"
 alias @exercism="cd ~/exercism"
+alias @fault="cd ~/Documents/Projects/machine_learning/anomaly_detection/fault-detection"
 
 alias @ruby-exercism="cd ~/exercism/ruby/ruby-exercism/ruby"
 
@@ -161,3 +207,5 @@ if [ -f '/Users/bbrown/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/bb
 alias kubeauthdev2="gcloud container clusters get-credentials tesla-development --zone us-west1-a --project oe-tesla-development-2 && kubectl config current-context"
 
 alias kubeauthproduction2="gcloud container clusters get-credentials tesla-production --zone us-west1-a --project oe-tesla-production-2 && kubectl config current-context"
+
+alias restart_pods="kubectl rollout restart deployment tesla-site-api-deployment"
